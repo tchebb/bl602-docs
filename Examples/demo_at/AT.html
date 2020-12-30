@@ -1,0 +1,1287 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>4. AT Commands Introduction &mdash; BL602 IoT SDK (Pine64 fork)  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="9. AUDIO UDP" href="../demo_audio_udp/audio_udp.html" />
+    <link rel="prev" title="3. AWS" href="../demo_aws/aws.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> BL602 IoT SDK (Pine64 fork)
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                release_bl_iot_sdk_1.6.11-1-g66bb28da-pine64
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Quick Start Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Quickstart_Guide/get_started.html">1. Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Quickstart_Guide/Linux/Quickstart_Linux_ubuntu.html">2. Linux Starter Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Quickstart_Guide/Windows/Quickstart_Windows_msys.html">3. Windows Starter Guide</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developer Environment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Developer_Environment/Setting_Up.html">1. Developer Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Developer_Environment/BLFlashEnv/BLFlashEnv.html">2. BLFlashEnv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Developer_Environment/freedom_studio/freedom_studio.html">3. Freedom Studio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Developer_Environment/eclipse/eclipse.html">4. Eclipse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Developer_Environment/openocd/openocd.html">5. openocd</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">1. Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../helloworld/helloworld.html">2. Hello World</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_aws/aws.html">3. AWS</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. AT Commands Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#basic-at-commands">5. Basic AT Commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">5.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#description">5.2. Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#at-uart">5.2.1. AT+UART</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#at-gmr">5.2.2. AT+GMR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#at-rst">5.2.3. AT+RST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#at-restore">5.2.4. AT+RESTORE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#at-s-help">5.2.5. AT+S.HELP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#at-gslp">5.2.6. AT+GSLP</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#wi-fi-at-commands">6. Wi-Fi AT Commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">6.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">6.2. Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#at-cwmode">6.2.1. AT+CWMODE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#at-cwlap">6.2.2. AT+CWLAP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#at-cwautoconn">6.2.3. AT+CWAUTOCONN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#at-cwjap">6.2.4. AT+CWJAP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#at-cwqap">6.2.5. AT+CWQAP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#at-softap">6.2.6. AT+SOFTAP</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#tcp-ip-at-commands">7. TCP/IP AT Commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id3">7.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">7.2. Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#at-cipstart">7.2.1. AT+CIPSTART</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#at-cipclose">7.2.2. AT+CIPCLOSE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#at-cipserver">7.2.3. AT+CIPSERVER</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#at-cipsend">7.2.4. AT+CIPSEND</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ipd">7.2.5. +IPD</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#ble-at-commands">8. BLE AT Commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id5">8.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">8.2. Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#at-bledatalen">8.2.1. AT+BLEDATALEN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#at-blename">8.2.2. AT+BLENAME</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#at-bleaddr">8.2.3. AT+BLEADDR</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_audio_udp/audio_udp.html">9. AUDIO UDP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_ble/ble.html">10. BLE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_blsync_ble/blsync_ble.html">11. BLSYNC-BLE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_cronalarm/cronalarm.html">12. cronalarm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_dac/DAC.html">13. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_hbnram/hbnram.html">14. HBNRAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_mesh/mesh.html">15. Mesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_peripherals_gpio/GPIO.html">16. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_peripherals_uart_echo/uart_echo.html">17. UART_echo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_peripherals_uart_ioctl/uart_ioctl.html">18. UART_ioctl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_protocols_http/http.html">19. Http client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_protocols_httpc/httpc.html">20. Httpc client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_storage_psm/psm.html">21. PSM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_storage_romfs/romfs.html">22. Romfs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_system_cli/cli.html">23. cli</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_system_fdt/fdt.html">24. FDT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_wifi/wifi.html">25. Wi-Fi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_zb/zigbee.html">26. Zigbee</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk_app_easyflash_boottimes/easyflash_boottimes.html">27. Easyflash4 boot times</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk_app_pwm/pwm.html">28. Pwm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../benchmark_security_aes/benchmark_security_aes_gcm.html">29. AES-GCM</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Components</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/arch.html">1. arch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/Command_line/helper.html">2. helper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/Command_line/aos_cli.html">3. cli</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/Hal_drv/gpio.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/Middleware/bloop/bloop.html">5. BLOOP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/Middleware/blsync/blsync.html">6. BLSYNC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/Middleware/dts/devicetree.html">7. device tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/Middleware/log/blog.html">8. blog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/Middleware/security/security.html">9. Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/Middleware/vfs/vfs.html">10. AOS VFS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/Middleware/yloop/yloop.html">11. yloop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/Network/httpc/httpc.html">12. HTTPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/Network/https/https.html">13. HTTPS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/Network/tls/tls.html">14. TLS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/Network/wifi/wifi.html">15. WiFi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/BLE/provision_WiFi/provision_WiFi.html">16. Provision_WiFi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/BLE/mesh/mesh.html">17. Mesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/BLE/ble_stack/ble_stack.html">18. BLE</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../API/sys/cronalarms.html">1. cronalarms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../API/wifi/wifi_mgmr.html">2. Wi-Fi Manager</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../README/README.html">1. Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Orphaned Pages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../bl602doc_tool/index.html">1. Dev Cube 用户手册</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">BL602 IoT SDK (Pine64 fork)</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><span class="section-number">4. </span>AT Commands Introduction</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/Examples/demo_at/AT.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="at-commands-introduction">
+<h1><span class="section-number">4. </span>AT Commands Introduction<a class="headerlink" href="#at-commands-introduction" title="Permalink to this headline">¶</a></h1>
+<p>This article introduces the Bouffalo Labs AT command set and usage. The command set includes: basic AT commands, Wi-Fi function AT commands, TCP/IP toolbox AT commands, and BLE related AT commands.</p>
+<table class="docutils align-default" id="id7">
+<caption><span class="caption-text">Command Types</span><a class="headerlink" href="#id7" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 22%" />
+<col style="width: 61%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Format</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Read</p></td>
+<td><p>AT+&lt;x&gt;?</p></td>
+<td><p>Get current value of command parameters</p></td>
+</tr>
+<tr class="row-odd"><td><p>Set</p></td>
+<td><p>AT+&lt;x&gt;=&lt;···&gt;</p></td>
+<td><p>Set value of command parameters</p></td>
+</tr>
+<tr class="row-even"><td><p>Execute</p></td>
+<td><p>AT+&lt;x&gt;</p></td>
+<td><p>Execute a command</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="basic-at-commands">
+<h1><span class="section-number">5. </span>Basic AT Commands<a class="headerlink" href="#basic-at-commands" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2><span class="section-number">5.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<table class="docutils align-default" id="id8">
+<caption><span class="caption-text">Command List</span><a class="headerlink" href="#id8" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 34%" />
+<col style="width: 66%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Command</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="#at-uart">AT+UART</a></p></td>
+<td><p>Set UART configuration</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#at-gmr">AT+GMR</a></p></td>
+<td><p>View version information</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#at-s-help">AT+S.HELP</a></p></td>
+<td><p>View AT help</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#at-rst">AT+RST</a></p></td>
+<td><p>Restart the module</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#at-restore">AT+RESTORE</a></p></td>
+<td><p>Reset</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#at-gslp">AT+GSLP</a></p></td>
+<td><p>Enter deep-sleep</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="description">
+<h2><span class="section-number">5.2. </span>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="at-uart">
+<h3><span class="section-number">5.2.1. </span>AT+UART<a class="headerlink" href="#at-uart" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 47%" />
+<col style="width: 46%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td rowspan="2"><p>Commands</p></td>
+<td rowspan="2"><p>Read Command</p>
+<p>AT+UART?</p>
+</td>
+<td rowspan="2"><p>Set Command</p>
+<p>AT+UART=&lt;baudrate&gt;,&lt;databits&gt;,&lt;stopbits&gt;,&lt;parity&gt;,&lt;flow control&gt;</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2"><p>Response</p></td>
+<td rowspan="2"><p>+UART_CUR:&lt;baudrate&gt;,&lt;databits&gt;,&lt;stopbits&gt;,&lt;parity&gt;,&lt;flow control&gt;</p>
+<p>OK</p>
+</td>
+<td rowspan="2"><p>OK</p></td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="19"><p>Parameters</p></td>
+<td colspan="2" rowspan="19"><ul class="simple">
+<li><p>&lt;baudrate&gt;: UART baud rate</p></li>
+<li><p>&lt;databits&gt;: number of data bits</p>
+<ul>
+<li><p>5: 5-bit</p></li>
+<li><p>6: 6-bit</p></li>
+<li><p>7: 7-bit</p></li>
+<li><p>8: 8-bit</p></li>
+</ul>
+</li>
+<li><p>&lt;stopbits&gt;: number of stop bits</p>
+<ul>
+<li><p>1: 1-bit</p></li>
+<li><p>2: 1.5-bit</p></li>
+<li><p>3: 2-bit</p></li>
+</ul>
+</li>
+<li><p>&lt;parity&gt;:</p>
+<ul>
+<li><p>0: None</p></li>
+<li><p>1: Odd</p></li>
+<li><p>2: Even</p></li>
+</ul>
+</li>
+<li><p>&lt;flow control&gt;:</p>
+<ul>
+<li><p>0: Disabled</p></li>
+<li><p>1: Enable RTS</p></li>
+<li><p>2: Enable CTS</p></li>
+<li><p>3: Enable RTS &amp; CTS</p></li>
+</ul>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="at-gmr">
+<h3><span class="section-number">5.2.2. </span>AT+GMR<a class="headerlink" href="#at-gmr" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 75%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Command</p></td>
+<td><p>AT+GMR</p></td>
+</tr>
+<tr class="row-even"><td rowspan="4"><p>Response</p></td>
+<td rowspan="4"><p>&lt;AT version info&gt;</p>
+<p>&lt;SDK version info&gt;</p>
+<p>&lt;compile time&gt;</p>
+<p>OK</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="at-rst">
+<h3><span class="section-number">5.2.3. </span>AT+RST<a class="headerlink" href="#at-rst" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 61%" />
+<col style="width: 39%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Command</p></td>
+<td><p>AT+RST</p></td>
+</tr>
+<tr class="row-even"><td><p>Response</p></td>
+<td><p>OK</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="at-restore">
+<h3><span class="section-number">5.2.4. </span>AT+RESTORE<a class="headerlink" href="#at-restore" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 61%" />
+<col style="width: 39%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Command</p></td>
+<td><p>AT+RESTORE</p></td>
+</tr>
+<tr class="row-even"><td><p>Response</p></td>
+<td><p>OK</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="at-s-help">
+<h3><span class="section-number">5.2.5. </span>AT+S.HELP<a class="headerlink" href="#at-s-help" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 61%" />
+<col style="width: 39%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Command</p></td>
+<td><p>AT+S.HELP</p></td>
+</tr>
+<tr class="row-even"><td><p>Response</p></td>
+<td><p>OK</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="at-gslp">
+<h3><span class="section-number">5.2.6. </span>AT+GSLP<a class="headerlink" href="#at-gslp" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 89%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Command</p></td>
+<td><p>AT+GSLP=&lt;time&gt;</p></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><p>Response</p></td>
+<td rowspan="2"><p>&lt;time&gt;</p>
+<p>OK</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>Parameters</p></td>
+<td><ul class="simple">
+<li><p>&lt;time&gt;: Sleep duration in seconds. BL602 will wake up after time has elapsed</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+</div>
+</div>
+<div class="section" id="wi-fi-at-commands">
+<h1><span class="section-number">6. </span>Wi-Fi AT Commands<a class="headerlink" href="#wi-fi-at-commands" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><span class="section-number">6.1. </span>Overview<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<table class="docutils align-default" id="id9">
+<caption><span class="caption-text">Command List</span><a class="headerlink" href="#id9" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 70%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Command</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#at-cwmode">AT+CWMODE</a></p></td>
+<td><p>Set Wi-Fi Mode (STA/AP/STA+AP)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#at-cwlap">AT+CWLAP</a></p></td>
+<td><p>Scan for nearby APs</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#at-cwjap">AT+CWJAP</a></p></td>
+<td><p>Connect to AP</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#at-cwqap">AT+CWQAP</a></p></td>
+<td><p>Disconnect from AP</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#at-cwautoconn">AT+CWAUTOCONN</a></p></td>
+<td><p>Set up automatic reconnection</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#at-softap">AT+SOFTAP</a></p></td>
+<td><p>Turn on an AP hotspot</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id2">
+<h2><span class="section-number">6.2. </span>Description<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="at-cwmode">
+<h3><span class="section-number">6.2.1. </span>AT+CWMODE<a class="headerlink" href="#at-cwmode" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 30%" />
+<col style="width: 61%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td rowspan="3"><p>Command</p></td>
+<td rowspan="3"><p>Read Command</p>
+<p>AT+CWMODE?</p>
+<p>Purpose: Read current Wi-Fi mode</p>
+</td>
+<td rowspan="3"><p>Set Command</p>
+<p>AT+CWMODE=&lt;mode&gt;</p>
+<p>Purpose: Set current Wi-Fi mode</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>Response</p></td>
+<td><p>+CWMODE:&lt;mode&gt;</p></td>
+<td><p>OK</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="5"><p>Parameters</p></td>
+<td colspan="2" rowspan="5"><ul>
+<li><p>&lt;mode&gt;:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>0: Wi-Fi disabled, Wi-Fi RF turned off</p></li>
+<li><p>1: Station mode</p></li>
+<li><p>2: SoftAP mode</p></li>
+<li><p>3: SoftAP+Station mode</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="at-cwlap">
+<h3><span class="section-number">6.2.2. </span>AT+CWLAP<a class="headerlink" href="#at-cwlap" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 91%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td rowspan="3"><p>Command</p></td>
+<td rowspan="3"><p>Execute command</p>
+<p>AT+CWLAP</p>
+<p>Purpose: Scan for nearby access points</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>Response</p></td>
+<td rowspan="3"><p>+CWLAP:</p>
+<p>&lt;ap list&gt;…</p>
+<p>OK</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>AP Details</p></td>
+<td><ul class="simple">
+<li><p>&lt;Serial Number&gt;,&lt;SSID&gt;,&lt;BSSID&gt;,&lt;Channel&gt;,&lt;Signal Strength&gt;,&lt;Encryption Method&gt;</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="at-cwautoconn">
+<h3><span class="section-number">6.2.3. </span>AT+CWAUTOCONN<a class="headerlink" href="#at-cwautoconn" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 31%" />
+<col style="width: 60%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td rowspan="3"><p>Command</p></td>
+<td rowspan="3"><p>Read Comamnd</p>
+<p>AT+CWAUTOCONN?</p>
+<p>Purpose: Check autoconnect on/off</p>
+</td>
+<td rowspan="3"><p>Set Command</p>
+<p>AT+CWAUTOCONN=&lt;auto_connect&gt;</p>
+<p>Purpose: Set autoconnect on/off</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>Response</p></td>
+<td><p>+CWAUTOCONN:&lt;auto_connect&gt;</p></td>
+<td><p>OK</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>Parameters</p></td>
+<td colspan="2" rowspan="3"><ul>
+<li><p>&lt;auto_connect&gt;:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>0: When the Wi-Fi mode is changed to Station or SoftAP+Station, do not automatically connect</p></li>
+<li><p>1: When the Wi-Fi mode is changed to Station or SoftAP+Station, automatically connect</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="at-cwjap">
+<h3><span class="section-number">6.2.4. </span>AT+CWJAP<a class="headerlink" href="#at-cwjap" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 5%" />
+<col style="width: 47%" />
+<col style="width: 48%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td rowspan="3"><p>Command</p></td>
+<td rowspan="3"><p>Read Command</p>
+<p>AT+CWJAP?</p>
+<p>Purpose: Get information about the AP the BL602 is connected to</p>
+</td>
+<td rowspan="3"><p>Set Command</p>
+<p>AT+CWJAP=&lt;ssid&gt;,&lt;pwd&gt;</p>
+<p>Purpose: Set which AP the BL602 should connect to</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="2"><p>Response</p></td>
+<td rowspan="2"><p>+CWJAP:&lt;ssid&gt;,&lt;ip&gt;</p>
+<p>OK</p>
+</td>
+<td rowspan="2"><p>OK</p>
+<p>+EVT:0:wifi connected</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>Parameters</p></td>
+<td rowspan="3"><ul class="simple">
+<li><p>&lt;ssid&gt;: String containing the SSID of the connected AP</p></li>
+<li><p>&lt;ip&gt;: The IP address obtained from the AP</p></li>
+</ul>
+</td>
+<td rowspan="3"><ul class="simple">
+<li><p>&lt;ssid&gt;: SSID of target AP</p></li>
+<li><p>&lt;pwd&gt;: The password of the target AP</p>
+<ul>
+<li><p>If either parameter contains any special characters like ” or , they need to be escaped</p></li>
+</ul>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="at-cwqap">
+<h3><span class="section-number">6.2.5. </span>AT+CWQAP<a class="headerlink" href="#at-cwqap" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 89%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td rowspan="2"><p>Command</p></td>
+<td rowspan="2"><p>Set command</p>
+<p>AT+CWQAP=&lt;link id&gt;</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>Response</p></td>
+<td><p>OK</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="at-softap">
+<h3><span class="section-number">6.2.6. </span>AT+SOFTAP<a class="headerlink" href="#at-softap" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 5%" />
+<col style="width: 47%" />
+<col style="width: 48%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td rowspan="3"><p>Command</p></td>
+<td rowspan="3"><p>Read Command</p>
+<p>AT+SOFTAP?</p>
+<p>Purpose: View the hotspot configuration</p>
+</td>
+<td rowspan="3"><p>Set Command</p>
+<p>AT+SOFTAP=&lt;ssid&gt;,[pwd]</p>
+<p>Purpose: Set the hotspot configuration</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="2"><p>Response</p></td>
+<td rowspan="2"><p>+SOFTAP:&lt;ip&gt;,&lt;bssid&gt;</p>
+<p>OK</p>
+</td>
+<td rowspan="2"><p>OK</p></td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>Parameters</p></td>
+<td rowspan="3"><ul class="simple">
+<li><p>&lt;ip&gt;: IP address of the open hotspot</p></li>
+<li><p>&lt;bssid&gt;: MAC address of the open hotspot</p></li>
+</ul>
+</td>
+<td rowspan="3"><ul class="simple">
+<li><p>&lt;ssid&gt;: SSID for the created hotspot</p></li>
+<li><p>[pwd]: Password for AP. If omitted, the hotspot is an open AP</p>
+<ul>
+<li><p>If either parameter contains any special characters like ” or , they need to be escaped</p></li>
+</ul>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+</div>
+</div>
+<div class="section" id="tcp-ip-at-commands">
+<h1><span class="section-number">7. </span>TCP/IP AT Commands<a class="headerlink" href="#tcp-ip-at-commands" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id3">
+<h2><span class="section-number">7.1. </span>Overview<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<table class="docutils align-default" id="id10">
+<caption><span class="caption-text">Command List</span><a class="headerlink" href="#id10" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 73%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Command</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="#at-cipstart">AT+CIPSTART</a></p></td>
+<td><p>Establish TCP connection or UDP transmission</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#at-cipclose">AT+CIPCLOSE</a></p></td>
+<td><p>Close TCP connection or UDP transmission</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#at-cipserver">AT+CIPSERVER</a></p></td>
+<td><p>Create or shutdown a TCP server</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#at-cipsend">AT+CIPSEND</a></p></td>
+<td><p>Send TCP/IP data</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ipd">+IPD</a></p></td>
+<td><p>Receive TCP/IP data</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id4">
+<h2><span class="section-number">7.2. </span>Description<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="at-cipstart">
+<h3><span class="section-number">7.2.1. </span>AT+CIPSTART<a class="headerlink" href="#at-cipstart" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default" id="id11">
+<caption><span class="caption-text">Establish TCP/UDP connection</span><a class="headerlink" href="#id11" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 92%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Set Command</p></td>
+<td><p>AT+CIPSTART=&lt;link id&gt;,&lt;type&gt;,&lt;remote IP&gt;,&lt;remote port&gt;</p></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><p>Response</p></td>
+<td rowspan="2"><p>OK</p>
+<p>Or, if a TCP connection has been established, response: ALREADY CONNECTTED ERROR</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="4"><p>Parameters</p></td>
+<td rowspan="4"><ul class="simple">
+<li><p>&lt;link id&gt;: The link ID to be set up</p></li>
+<li><p>&lt;type&gt;: String parameter: “TCP or “UDP”</p></li>
+<li><p>&lt;remote IP&gt;: String parameter: remote IP address to connect to</p></li>
+<li><p>&lt;remote port&gt;: Remote port number</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="2"><p>Examples</p></td>
+<td rowspan="2"><p>AT+CIPSTART=0,TCP,192.168.101,8000</p>
+<p>AT+CIPSTART=1,UDP,192.168.101,5000</p>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="at-cipclose">
+<h3><span class="section-number">7.2.2. </span>AT+CIPCLOSE<a class="headerlink" href="#at-cipclose" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 86%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td rowspan="2"><p>Command</p></td>
+<td rowspan="2"><p>Set command:</p>
+<p>AT+CIPCLOSE=&lt;link id&gt;</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>Response</p></td>
+<td><p>OK</p></td>
+</tr>
+<tr class="row-even"><td><p>Parameters</p></td>
+<td><ul class="simple">
+<li><p>&lt;link id&gt;: The link ID to be closed</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="at-cipserver">
+<h3><span class="section-number">7.2.3. </span>AT+CIPSERVER<a class="headerlink" href="#at-cipserver" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 87%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td rowspan="2"><p>Command</p></td>
+<td rowspan="2"><p>Set Command:</p>
+<p>AT+CIPSERVER=&lt;mode&gt;[,&lt;port&gt;]</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>Response</p></td>
+<td><p>OK</p></td>
+</tr>
+<tr class="row-even"><td rowspan="5"><p>Parameters</p></td>
+<td rowspan="5"><ul>
+<li><p>&lt;mode&gt;:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>0: Shutdown server</p></li>
+<li><p>1: Start  server</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>&lt;port&gt;: Port number, default is 333</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>Examples</p></td>
+<td rowspan="3"><p>// Start a TCP server listening on port 80</p>
+<blockquote>
+<div><p>AT+CIPSERVER=1,80</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="at-cipsend">
+<h3><span class="section-number">7.2.4. </span>AT+CIPSEND<a class="headerlink" href="#at-cipsend" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 87%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td rowspan="2"><p>Command</p></td>
+<td rowspan="2"><p>Set Command:</p>
+<p>AT+CIPSEND=&lt;link id&gt;,&lt;data len&gt;</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>Response</p></td>
+<td><p>OK</p></td>
+</tr>
+<tr class="row-even"><td rowspan="3"><p>Parameters</p></td>
+<td rowspan="3"><ul class="simple">
+<li><p>&lt;link id&gt;: Which link ID to send data on</p></li>
+<li><p>&lt;data len&gt;: The length of data to be transmitted in bytes</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="3"><p>Examples</p></td>
+<td rowspan="3"><blockquote>
+<div><p>AT+CIPSEND=0,20</p>
+</div></blockquote>
+<p>Indicates that 20 bytes will be sent to the connection with id 0</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="ipd">
+<h3><span class="section-number">7.2.5. </span>+IPD<a class="headerlink" href="#ipd" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 86%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td rowspan="3"><p>Description</p></td>
+<td rowspan="3"><p>+IPD is the response when receiving TCP/UDP peer connection data</p>
+<p>+IPD:&lt;link id&gt;,&lt;data len&gt;</p>
+<p>&lt;data&gt;</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>Parameters</p></td>
+<td rowspan="3"><ul class="simple">
+<li><p>&lt;link id&gt;: ID of the link that the data was received on</p></li>
+<li><p>&lt;data len&gt;: The length of the data to be received in bytes</p></li>
+<li><p>&lt;data&gt;: The data received</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+</div>
+</div>
+<div class="section" id="ble-at-commands">
+<h1><span class="section-number">8. </span>BLE AT Commands<a class="headerlink" href="#ble-at-commands" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id5">
+<h2><span class="section-number">8.1. </span>Overview<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<table class="docutils align-default" id="id12">
+<caption><span class="caption-text">Command List</span><a class="headerlink" href="#id12" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 70%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Command</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#at-bledatalen">AT+BLEDATALEN</a></p></td>
+<td><p>Set BLE packet length</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#at-blename">AT+BLENAME</a></p></td>
+<td><p>Set BLE device name</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#at-bleaddr">AT+BLEADDR</a></p></td>
+<td><p>Set BLE device address</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id6">
+<h2><span class="section-number">8.2. </span>Description<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="at-bledatalen">
+<h3><span class="section-number">8.2.1. </span>AT+BLEDATALEN<a class="headerlink" href="#at-bledatalen" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 87%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td rowspan="3"><p>Command</p></td>
+<td rowspan="3"><p>Set Command:</p>
+<p>AT+BLEDATALEN=&lt;conn_index&gt;,&lt;pkt_data_len&gt;</p>
+<p>Purpose: Set the BLE data packet length</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>Response</p></td>
+<td><p>OK</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>Parameters</p></td>
+<td rowspan="2"><ul class="simple">
+<li><p>&lt;conn_index&gt;: BLE connection number, range [0-2].</p></li>
+<li><p>&lt;pkt_data_len&gt;: Data packet length, range: 0x001b - 0x00fb</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td><p>Notes</p></td>
+<td><ul class="simple">
+<li><p>Need to establish a BLE connection before setting data length</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td rowspan="3"><p>Examples</p></td>
+<td rowspan="3"><p>AT+BLEINIT=1   // initialize as client</p>
+<blockquote>
+<div><blockquote>
+<div><p>AT+BLECONN=0,”24:0a:c4:09:34:23”</p>
+</div></blockquote>
+<p>AT+BLEDATALEN=0,30</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="at-blename">
+<h3><span class="section-number">8.2.2. </span>AT+BLENAME<a class="headerlink" href="#at-blename" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 37%" />
+<col style="width: 51%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td rowspan="3"><p>Command</p></td>
+<td rowspan="3"><p>Read Command</p>
+<p>AT+BLENAME?</p>
+<p>Purpose: Read BLE name</p>
+</td>
+<td rowspan="3"><p>Set Command</p>
+<p>AT+BLENAME=&lt;device_name&gt;</p>
+<p>Purpose: Set the BLE name</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="2"><p>Response</p></td>
+<td rowspan="2"><p>+BLENAME:&lt;device_name&gt;</p>
+<p>OK</p>
+</td>
+<td rowspan="2"><p>OK</p></td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td><p>Parameters</p></td>
+<td colspan="2"><ul class="simple">
+<li><p>&lt;device_name&gt;: BLE device name (maximum length is 32)</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="at-bleaddr">
+<h3><span class="section-number">8.2.3. </span>AT+BLEADDR<a class="headerlink" href="#at-bleaddr" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 47%" />
+<col style="width: 43%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td rowspan="3"><p>Command</p></td>
+<td rowspan="3"><p>Read Command</p>
+<p>AT+BLEADDR?</p>
+<p>Purpose: Query public address of BLE device</p>
+</td>
+<td rowspan="3"><p>Set Command</p>
+<p>AT+BLEADDR=&lt;addr_type&gt;[,&lt;random_addr&gt;]</p>
+<p>Purpose: Set BLE device address</p>
+</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="2"><p>Response</p></td>
+<td rowspan="2"><p>+BLEADDR:&lt;BLE_public_addr&gt;</p>
+<p>OK</p>
+</td>
+<td rowspan="2"><p>OK</p></td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="3"><p>Parameters</p></td>
+<td colspan="2" rowspan="3"><ul>
+<li><p>&lt;addr_type&gt;:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>0: public address</p></li>
+<li><p>1: random address</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../demo_audio_udp/audio_udp.html" class="btn btn-neutral float-right" title="9. AUDIO UDP" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../demo_aws/aws.html" class="btn btn-neutral float-left" title="3. AWS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Bouffalo Lab, volunteers
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

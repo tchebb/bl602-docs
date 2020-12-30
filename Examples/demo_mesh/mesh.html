@@ -1,0 +1,422 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>15. Mesh &mdash; BL602 IoT SDK (Pine64 fork)  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="16. GPIO" href="../demo_peripherals_gpio/GPIO.html" />
+    <link rel="prev" title="14. HBNRAM" href="../demo_hbnram/hbnram.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> BL602 IoT SDK (Pine64 fork)
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                release_bl_iot_sdk_1.6.11-1-g66bb28da-pine64
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Quick Start Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Quickstart_Guide/get_started.html">1. Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Quickstart_Guide/Linux/Quickstart_Linux_ubuntu.html">2. Linux Starter Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Quickstart_Guide/Windows/Quickstart_Windows_msys.html">3. Windows Starter Guide</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developer Environment</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Developer_Environment/Setting_Up.html">1. Developer Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Developer_Environment/BLFlashEnv/BLFlashEnv.html">2. BLFlashEnv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Developer_Environment/freedom_studio/freedom_studio.html">3. Freedom Studio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Developer_Environment/eclipse/eclipse.html">4. Eclipse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Developer_Environment/openocd/openocd.html">5. openocd</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">1. Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../helloworld/helloworld.html">2. Hello World</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_aws/aws.html">3. AWS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_at/AT.html">4. AT Commands Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_at/AT.html#basic-at-commands">5. Basic AT Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_at/AT.html#wi-fi-at-commands">6. Wi-Fi AT Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_at/AT.html#tcp-ip-at-commands">7. TCP/IP AT Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_at/AT.html#ble-at-commands">8. BLE AT Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_audio_udp/audio_udp.html">9. AUDIO UDP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_ble/ble.html">10. BLE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_blsync_ble/blsync_ble.html">11. BLSYNC-BLE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_cronalarm/cronalarm.html">12. cronalarm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_dac/DAC.html">13. DAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_hbnram/hbnram.html">14. HBNRAM</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">15. Mesh</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">15.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage-steps">15.2. Usage steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_peripherals_gpio/GPIO.html">16. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_peripherals_uart_echo/uart_echo.html">17. UART_echo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_peripherals_uart_ioctl/uart_ioctl.html">18. UART_ioctl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_protocols_http/http.html">19. Http client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_protocols_httpc/httpc.html">20. Httpc client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_storage_psm/psm.html">21. PSM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_storage_romfs/romfs.html">22. Romfs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_system_cli/cli.html">23. cli</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_system_fdt/fdt.html">24. FDT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_wifi/wifi.html">25. Wi-Fi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demo_zb/zigbee.html">26. Zigbee</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk_app_easyflash_boottimes/easyflash_boottimes.html">27. Easyflash4 boot times</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk_app_pwm/pwm.html">28. Pwm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../benchmark_security_aes/benchmark_security_aes_gcm.html">29. AES-GCM</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Components</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/arch.html">1. arch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/Command_line/helper.html">2. helper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/Command_line/aos_cli.html">3. cli</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/Hal_drv/gpio.html">4. GPIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/Middleware/bloop/bloop.html">5. BLOOP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/Middleware/blsync/blsync.html">6. BLSYNC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/Middleware/dts/devicetree.html">7. device tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/Middleware/log/blog.html">8. blog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/Middleware/security/security.html">9. Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/Middleware/vfs/vfs.html">10. AOS VFS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/Middleware/yloop/yloop.html">11. yloop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/Network/httpc/httpc.html">12. HTTPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/Network/https/https.html">13. HTTPS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/Network/tls/tls.html">14. TLS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/Network/wifi/wifi.html">15. WiFi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/BLE/provision_WiFi/provision_WiFi.html">16. Provision_WiFi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/BLE/mesh/mesh.html">17. Mesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Components/BLE/ble_stack/ble_stack.html">18. BLE</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../API/sys/cronalarms.html">1. cronalarms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../API/wifi/wifi_mgmr.html">2. Wi-Fi Manager</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../README/README.html">1. Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Orphaned Pages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../bl602doc_tool/index.html">1. Dev Cube 用户手册</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">BL602 IoT SDK (Pine64 fork)</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><span class="section-number">15. </span>Mesh</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/Examples/demo_mesh/mesh.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mesh">
+<span id="demo-ble-index"></span><h1><span class="section-number">15. </span>Mesh<a class="headerlink" href="#mesh" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2><span class="section-number">15.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This example shows how to use ble mesh.</p>
+</div>
+<div class="section" id="usage-steps">
+<h2><span class="section-number">15.2. </span>Usage steps<a class="headerlink" href="#usage-steps" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Install <code class="docutils literal notranslate"><span class="pre">bl_mesh_app.apk</span></code> on your phone</p></li>
+<li><p>Download and compile the <code class="docutils literal notranslate"><span class="pre">customer_app/bl602_demo_event</span></code> project</p></li>
+<li><p>Run following Mesh commands in the serial monitor:</p>
+<blockquote>
+<div><p>#stack_ble</p>
+<p>#blemesh_init</p>
+<p>#blemesh_pb 2 1</p>
+</div></blockquote>
+</li>
+</ul>
+<div class="figure align-center">
+<img alt="../../_images/image222.png" src="../../_images/image222.png" />
+</div>
+<ul class="simple">
+<li><p>Open the app and select ADD NODE in the Network column</p></li>
+</ul>
+<div class="figure align-center">
+<img alt="../../_images/image231.png" src="../../_images/image231.png" />
+</div>
+<ul class="simple">
+<li><p>Select your device</p></li>
+</ul>
+<div class="figure align-center">
+<img alt="../../_images/image241.png" src="../../_images/image241.png" />
+</div>
+<ul class="simple">
+<li><p>Click the IDENTIFY button</p></li>
+</ul>
+<div class="figure align-center">
+<img alt="../../_images/image251.png" src="../../_images/image251.png" />
+</div>
+<ul class="simple">
+<li><p>Click the PROVISION button</p></li>
+</ul>
+<div class="figure align-center">
+<img alt="../../_images/image261.png" src="../../_images/image261.png" />
+</div>
+<ul class="simple">
+<li><p>Select No OOB in the pop-up window and click ok</p></li>
+</ul>
+<div class="figure align-center">
+<img alt="../../_images/image271.png" src="../../_images/image271.png" />
+</div>
+<ul class="simple">
+<li><p>Click ok</p></li>
+</ul>
+<div class="figure align-center">
+<img alt="../../_images/image281.png" src="../../_images/image281.png" />
+</div>
+<ul class="simple">
+<li><p>Your node is automatically added to the Network column, click on your connected device</p></li>
+</ul>
+<div class="figure align-center">
+<img alt="../../_images/image291.png" src="../../_images/image291.png" />
+</div>
+<ul class="simple">
+<li><p>Locate Elements option and click it’s drop-down button</p></li>
+</ul>
+<div class="figure align-center">
+<img alt="../../_images/image301.png" src="../../_images/image301.png" />
+</div>
+<ul class="simple">
+<li><p>Select the Generic On Off Server option</p></li>
+</ul>
+<div class="figure align-center">
+<img alt="../../_images/image312.png" src="../../_images/image312.png" />
+</div>
+<ul class="simple">
+<li><p>Click the BIND KEY button</p></li>
+</ul>
+<div class="figure align-center">
+<img alt="../../_images/image321.png" src="../../_images/image321.png" />
+</div>
+<ul class="simple">
+<li><p>Click Application key 1</p></li>
+</ul>
+<div class="figure align-center">
+<img alt="../../_images/image331.png" src="../../_images/image331.png" />
+</div>
+<ul class="simple">
+<li><p>Click on the ON and OFF buttons to control the LED switch</p></li>
+</ul>
+<div class="figure align-center">
+<img alt="../../_images/image361.png" src="../../_images/image361.png" />
+</div>
+<ul class="simple">
+<li><p>The following information can be seen in the serial monitor, indicating that the LED is successfully controlled</p></li>
+</ul>
+<div class="figure align-center">
+<img alt="../../_images/image411.png" src="../../_images/image411.png" />
+</div>
+<ul class="simple">
+<li><p>Click the SUBSCRIBE button</p></li>
+</ul>
+<div class="figure align-center">
+<img alt="../../_images/image341.png" src="../../_images/image341.png" />
+</div>
+<ul class="simple">
+<li><p>Select “Create a new group to subscribe” option</p></li>
+</ul>
+<div class="figure align-center">
+<img alt="../../_images/image351.png" src="../../_images/image351.png" />
+</div>
+<ul class="simple">
+<li><p>Follow the same steps to add another node. Then click on your group</p></li>
+</ul>
+<div class="figure align-center">
+<img alt="../../_images/image371.png" src="../../_images/image371.png" />
+</div>
+<ul class="simple">
+<li><p>In the group, clicking on ON and OFF buttons prints the LED information in the serial monitor, indicating that the mesh is working</p></li>
+</ul>
+<div class="figure align-center">
+<img alt="../../_images/image381.png" src="../../_images/image381.png" />
+</div>
+<div class="figure align-center">
+<img alt="../../_images/image411.png" src="../../_images/image411.png" />
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../demo_peripherals_gpio/GPIO.html" class="btn btn-neutral float-right" title="16. GPIO" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../demo_hbnram/hbnram.html" class="btn btn-neutral float-left" title="14. HBNRAM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Bouffalo Lab, volunteers
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
