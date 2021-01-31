@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>15. WiFi &mdash; BL602 IoT SDK (Pine64 fork)  documentation</title>
+  <title>7. WiFi &mdash; BL602 IoT SDK (Pine64 fork)  documentation</title>
   
 
   
@@ -16,8 +16,12 @@
 
   
   
+
   
   
+
+  
+    <link rel="canonical" href="https://pine64.github.io/bl602-docs/Components/Network/wifi/wifi.html" />
 
   
   <!--[if lt IE 9]>
@@ -35,8 +39,8 @@
     
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="16. Provision_WiFi" href="../../BLE/provision_WiFi/provision_WiFi.html" />
-    <link rel="prev" title="14. TLS" href="../tls/tls.html" /> 
+    <link rel="next" title="8. BLE" href="../../BLE/ble_stack/ble_stack.html" />
+    <link rel="prev" title="6. yloop" href="../../Middleware/yloop/yloop.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -50,7 +54,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> BL602 IoT SDK (Pine64 fork)
+            <a href="../../../index.html" class="icon icon-home"> BL602 IoT SDK (Pine64 fork)
           
 
           
@@ -90,14 +94,18 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../Quickstart_Guide/get_started.html">1. Quick Start Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../Quickstart_Guide/Linux/Quickstart_Linux_ubuntu.html">2. Linux Starter Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../Quickstart_Guide/Windows/Quickstart_Windows_msys.html">3. Windows Starter Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Quickstart_Guide/Windows/Quickstart_Windows_wsl.html">4. Windows (WSL) Starter Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Quickstart_Guide/connecting_the_hardware.html">5. Connecting the Hardware</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Developer Environment</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../Developer_Environment/Setting_Up.html">1. Developer Environment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../Developer_Environment/BLFlashEnv/BLFlashEnv.html">2. BLFlashEnv</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../Developer_Environment/freedom_studio/freedom_studio.html">3. Freedom Studio</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../Developer_Environment/eclipse/eclipse.html">4. Eclipse</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../Developer_Environment/openocd/openocd.html">5. openocd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Developer_Environment/BLFlashEnv/BLFlashEnv.html">2. Dev Cube introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Developer_Environment/BLFlashEnv/BLFlashEnv.html#image-composition">3. Image Composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Developer_Environment/BLFlashEnv/BLFlashEnv.html#mcu-program-download">4. MCU Program Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Developer_Environment/BLFlashEnv/BLFlashEnv.html#iot-program-download">5. IOT program download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Developer_Environment/freedom_studio/freedom_studio.html">6. Freedom Studio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Developer_Environment/eclipse/eclipse.html">7. Eclipse</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Examples</span></p>
 <ul>
@@ -133,30 +141,20 @@
 </ul>
 <p class="caption"><span class="caption-text">Components</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../arch.html">1. arch</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../Command_line/helper.html">2. helper</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../Command_line/aos_cli.html">3. cli</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../Hal_drv/gpio.html">4. GPIO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../Middleware/bloop/bloop.html">5. BLOOP</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../Middleware/blsync/blsync.html">6. BLSYNC</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../Middleware/dts/devicetree.html">7. device tree</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../Middleware/log/blog.html">8. blog</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../Middleware/security/security.html">9. Security</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../Middleware/vfs/vfs.html">10. AOS VFS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../Middleware/yloop/yloop.html">11. yloop</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../httpc/httpc.html">12. HTTPC</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../https/https.html">13. HTTPS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tls/tls.html">14. TLS</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">15. WiFi</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id1">15.1. 概述</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id2">15.2. 应用实例</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#reason-codes">15.3. Reason Codes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#api">15.4. API参考</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Command_line/helper.html">1. helper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Command_line/aos_cli.html">2. cli</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Middleware/dts/devicetree.html">3. device tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Middleware/log/blog.html">4. blog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Middleware/vfs/vfs.html">5. AOS VFS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Middleware/yloop/yloop.html">6. yloop</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">7. WiFi</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">7.1. 概述</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">7.2. 应用实例</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reason-codes">7.3. Reason Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#api">7.4. API参考</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../BLE/provision_WiFi/provision_WiFi.html">16. Provision_WiFi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../BLE/mesh/mesh.html">17. Mesh</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../BLE/ble_stack/ble_stack.html">18. BLE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../BLE/ble_stack/ble_stack.html">8. BLE</a></li>
 </ul>
 <p class="caption"><span class="caption-text">API</span></p>
 <ul>
@@ -166,10 +164,6 @@
 <p class="caption"><span class="caption-text">Documentation</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../README/README.html">1. Documentation</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Orphaned Pages</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../bl602doc_tool/index.html">1. Dev Cube 用户手册</a></li>
 </ul>
 
             
@@ -210,18 +204,20 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
       <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li><span class="section-number">15. </span>WiFi</li>
+      <li><span class="section-number">7. </span>WiFi</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../../../_sources/Components/Network/wifi/wifi.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -236,9 +232,9 @@
            <div itemprop="articleBody">
             
   <div class="section" id="wifi">
-<span id="wifi-index"></span><h1><span class="section-number">15. </span>WiFi<a class="headerlink" href="#wifi" title="Permalink to this headline">¶</a></h1>
+<span id="wifi-index"></span><h1><span class="section-number">7. </span>WiFi<a class="headerlink" href="#wifi" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
-<h2><span class="section-number">15.1. </span>概述<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">7.1. </span>概述<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>本文档介绍BL_IoT SDK的WiFi联网功能。主要包括</p>
 <ul class="simple">
 <li><p>基站模式（即 STA 模式或 Wi-Fi 客户端模式），此时 BL_IoT 连接到接入点 (AP)。</p></li>
@@ -250,11 +246,9 @@
 </ul>
 </div>
 <div class="section" id="id2">
-<h2><span class="section-number">15.2. </span>应用实例<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">7.2. </span>应用实例<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>BL_IoT的实例 <code class="docutils literal notranslate"><span class="pre">bl602_demo_wifi</span></code> 目录下包含了一个应用程序，该demo介绍了如何使用BL_IoT模组连接到AP等一系列wifi操作。该实例实现的主要思路如下：</p>
-<div class="figure align-default">
-<img alt="" src="Components/Network/wifi/imgs/image1.png" />
-</div>
+<p><strong>The original documentation had an image called</strong> <code class="docutils literal notranslate"><span class="pre">imgs/image1.png</span></code> <strong>here, but the file is not publically available. This text is here to prevent a missing image warning.</strong></p>
 <ul class="simple">
 <li><p>在主函数 <code class="docutils literal notranslate"><span class="pre">bfl_main()</span></code> 中创建一个 <code class="docutils literal notranslate"><span class="pre">aos_loop_proc()</span></code> 线程，在此线程中调用 <code class="docutils literal notranslate"><span class="pre">aos_register_event_filter()</span></code> 接口注册一个 <code class="docutils literal notranslate"><span class="pre">EV_WIFI</span></code> 事件的监听函数 <code class="docutils literal notranslate"><span class="pre">event_cb_wifi_event()</span></code> ；</p></li>
 <li><p>首先用户在终端中输入 <code class="docutils literal notranslate"><span class="pre">stack_wifi</span></code> 命令后，在 <code class="docutils literal notranslate"><span class="pre">cmd_stack_wifi()</span></code> 函数中创建一个 <code class="docutils literal notranslate"><span class="pre">wifi_main()</span></code> 的线程，接着调用 <code class="docutils literal notranslate"><span class="pre">aos_post_event()</span></code> 接口发布 <code class="docutils literal notranslate"><span class="pre">CODE_WIFI_ON_INIT_DONE</span></code> 事件后， <code class="docutils literal notranslate"><span class="pre">event_cb_wifi_event()</span></code> 会被调用，并进入case <code class="docutils literal notranslate"><span class="pre">CODE_WIFI_ON_INIT_DONE</span></code> 分支从而调用 <code class="docutils literal notranslate"><span class="pre">wifi_mgmr_start_background()</span></code> 开启WiFi Manager，同时发布 <code class="docutils literal notranslate"><span class="pre">CODE_WIFI_ON_MGMR_DONE</span></code> 事件，进入case <code class="docutils literal notranslate"><span class="pre">CODE_WIFI_ON_MGMR_DONE</span></code> 分支调用 <code class="docutils literal notranslate"><span class="pre">_connect_wifi()</span></code> 函数，此函数先判断easyflash中是否设置了可连接的ssid，如果设置了则会自动进行wifi连接，没有设置则需手动输命令设置；</p></li>
@@ -262,7 +256,7 @@
 </ul>
 </div>
 <div class="section" id="reason-codes">
-<h2><span class="section-number">15.3. </span>Reason Codes<a class="headerlink" href="#reason-codes" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">7.3. </span>Reason Codes<a class="headerlink" href="#reason-codes" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">WLAN_FW_SUCCESSFUL</span></code></p>
 <p>WiFi连接成功</p>
 <p><code class="docutils literal notranslate"><span class="pre">WLAN_FW_TX_AUTH_FRAME_ALLOCATE_FAIILURE</span></code></p>
@@ -299,7 +293,7 @@
 <p>信标丢失</p>
 </div>
 <div class="section" id="api">
-<h2><span class="section-number">15.4. </span>API参考<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">7.4. </span>API参考<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>头文件</p></li>
 </ul>
@@ -541,37 +535,29 @@
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../../BLE/provision_WiFi/provision_WiFi.html" class="btn btn-neutral float-right" title="16. Provision_WiFi" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="../tls/tls.html" class="btn btn-neutral float-left" title="14. TLS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="../../BLE/ble_stack/ble_stack.html" class="btn btn-neutral float-right" title="8. BLE" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../../Middleware/yloop/yloop.html" class="btn btn-neutral float-left" title="6. yloop" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020, Bouffalo Lab, volunteers
+        &#169; Copyright 2020, Bouffalo Lab, volunteers.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
